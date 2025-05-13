@@ -1,0 +1,26 @@
+vtysh # open shell frrouting
+conf t # se mettre en mode configuration
+hostname iel-mach-3 # set hostname
+no ipv6 forwarding # dont transfer in ipv6
+
+## setup interface eth1
+interface eth1
+ip address 10.1.1.6/30
+ip ospf area 0
+## setup interface lo
+interface lo
+ip address 1.1.1.3/30
+ip ospf area 0
+
+## setup bgp
+router bgp 1
+neighbor 1.1.1.1 remote-as 1
+neighbor 1.1.1.1  update-source lo
+
+## setup evpn
+address-family l2vpn evpn
+neighbor 1.1.1.1 activate
+exit-address-family
+
+
+router ospf

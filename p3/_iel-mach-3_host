@@ -1,0 +1,2 @@
+# Assign the IP address 20.1.1.2/24to the 'eth0' interface
+ip addr add 20.1.1.2/24 dev eth0
